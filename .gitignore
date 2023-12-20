@@ -43,3 +43,4 @@ __snapshots__/
 
 # Build files
 build/
+    "@types/jsonwebtoken": "^9.0.5",
