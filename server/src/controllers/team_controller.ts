@@ -1,6 +1,6 @@
 import Team from '#/models/team_model';
 import { getTeams } from '#/util/rapid_api_queries';
-import { RequestHandler } from 'express';
+import { RequestHandler, query } from 'express';
 
 export const saveAllTeams: RequestHandler = async (req, res) => {
   const count = await Team.countDocuments();
@@ -36,10 +36,18 @@ export const removeAllTeams: RequestHandler = async (req, res) => {
   if (count === 0)
     return res.status(422).json({ error: 'Teams already removed.' });
 
-  try {
-    await Team.deleteMany();
-    res.status(201).json({ message: 'All teams removed.' });
-  } catch (error) {
-    res.status(422).json({ error: 'Could not remove teams.' });
-  }
+  await Team.deleteMany();
+  res.status(201).json({ message: 'All teams removed.' });
+};
+
+export const getAllTeams: RequestHandler = async (req, res) => {
+  const teams = await Team.find();
+  res.status(201).json(teams);
+};
+
+export const getTeamById: RequestHandler = async (req, res) => {
+  const { teamId } = req.params;
+  const team = await Team.findOne({ teamId: teamId });
+  if (!team) return res.status(404).json({ error: 'Team not found.' });
+  res.status(201).json({ team });
 };
