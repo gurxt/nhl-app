@@ -13,6 +13,7 @@ export const saveAllTeams: RequestHandler = async (req, res) => {
 
   teams.data.sports[0].leagues[0].teams.forEach((t: any) => {
     const team = {
+      teamId: t.team.id,
       name: t.team.displayName,
       abbreviation: t.team.abbreviation,
       color: t.team.color,
@@ -28,4 +29,17 @@ export const saveAllTeams: RequestHandler = async (req, res) => {
     Team.create(team);
   });
   res.status(201).json({ message: 'Teams successfully added.' });
+};
+
+export const removeAllTeams: RequestHandler = async (req, res) => {
+  const count = await Team.countDocuments();
+  if (count === 0)
+    return res.status(422).json({ error: 'Teams already removed.' });
+
+  try {
+    await Team.deleteMany();
+    res.status(201).json({ message: 'All teams removed.' });
+  } catch (error) {
+    res.status(422).json({ error: 'Could not remove teams.' });
+  }
 };

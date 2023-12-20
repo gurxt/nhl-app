@@ -1,7 +1,8 @@
 import { Model, ObjectId, Schema, model, models } from 'mongoose';
 
 export interface TeamDocument {
-  id: ObjectId;
+  _id: ObjectId;
+  teamId: string;
   name: string;
   abbreviation: string;
   color: string;
@@ -16,6 +17,10 @@ export interface TeamDocument {
 
 const TeamSchema = new Schema<TeamDocument>(
   {
+    teamId: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
