@@ -40,6 +40,7 @@ const TeamSchema = new Schema<TeamDocument>(
     players: [
       {
         type: Schema.Types.ObjectId,
+        ref: 'Player',
       },
     ],
     logos: [

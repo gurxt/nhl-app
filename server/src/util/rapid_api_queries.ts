@@ -36,7 +36,6 @@ export const getPlayers = async (teamId: string) => {
   try {
     let players = await axios.request(options);
     players = players?.data.team.athletes;
-    console.log(players);
     return players;
   } catch (error) {
     console.error(error);

@@ -30,91 +30,94 @@ export interface PlayerDocument {
   active: boolean;
 }
 
-export const PlayerSchema = new Schema<PlayerDocument>({
-  teamId: {
-    type: String,
-    required: true,
-    ref: 'Team',
+export const PlayerSchema = new Schema<PlayerDocument>(
+  {
+    teamId: {
+      type: String,
+      required: true,
+      ref: 'Team',
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    shortName: {
+      type: String,
+      required: true,
+    },
+    weight: {
+      type: Number,
+      required: true,
+    },
+    height: {
+      type: Number,
+      required: true,
+    },
+    draft: {
+      type: new Schema({
+        round: {
+          type: Number,
+        },
+        year: {
+          type: Number,
+        },
+        selection: {
+          type: Number,
+        },
+      }),
+      required: true,
+    },
+    birthPlace: {
+      type: new Schema({
+        city: {
+          type: String,
+        },
+        state: {
+          type: String,
+        },
+        country: {
+          type: String,
+        },
+      }),
+      required: true,
+    },
+    headshot: {
+      type: String,
+    },
+    shoots: {
+      type: String,
+    },
+    position: {
+      type: new Schema({
+        name: {
+          type: String,
+          required: true,
+        },
+        abbreviation: {
+          type: String,
+          required: true,
+        },
+      }),
+      required: true,
+    },
+    jerseyNumber: {
+      type: Number,
+    },
+    experience: {
+      type: Number,
+      required: true,
+    },
+    active: {
+      type: Boolean,
+      required: true,
+    },
   },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  shortName: {
-    type: String,
-    required: true,
-  },
-  weight: {
-    type: Number,
-    required: true,
-  },
-  height: {
-    type: Number,
-    required: true,
-  },
-  draft: {
-    type: new Schema({
-      round: {
-        type: Number,
-      },
-      year: {
-        type: Number,
-      },
-      selection: {
-        type: Number,
-      },
-    }),
-    required: true,
-  },
-  birthPlace: {
-    type: new Schema({
-      city: {
-        type: String,
-      },
-      state: {
-        type: String,
-      },
-      country: {
-        type: String,
-      },
-    }),
-    required: true,
-  },
-  headshot: {
-    type: String,
-  },
-  shoots: {
-    type: String,
-  },
-  position: {
-    type: new Schema({
-      name: {
-        type: String,
-        required: true,
-      },
-      abbreviation: {
-        type: String,
-        required: true,
-      },
-    }),
-    required: true,
-  },
-  jerseyNumber: {
-    type: Number,
-  },
-  experience: {
-    type: Number,
-    required: true,
-  },
-  active: {
-    type: Boolean,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const Player = models.Player || model('Player', PlayerSchema);
 
