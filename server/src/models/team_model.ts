@@ -7,12 +7,12 @@ export interface TeamDocument {
   abbreviation: string;
   color: string;
   altColor: string;
+  players?: ObjectId[];
   logos: {
     href: string;
     width: number;
     height: number;
   }[];
-  // TODO - maybe add team links.
 }
 
 const TeamSchema = new Schema<TeamDocument>(
@@ -37,6 +37,11 @@ const TeamSchema = new Schema<TeamDocument>(
       type: String,
       required: false,
     },
+    players: [
+      {
+        type: Schema.Types.ObjectId,
+      },
+    ],
     logos: [
       {
         href: {

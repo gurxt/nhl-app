@@ -19,3 +19,27 @@ export const getTeams = async (): Promise<AxiosResponse<any> | null> => {
     return null;
   }
 };
+
+export const getPlayers = async (teamId: string) => {
+  const axios = require('axios');
+
+  const options = {
+    method: 'GET',
+    url: 'https://nhl-api5.p.rapidapi.com/nhlteamplayers',
+    params: { teamid: teamId },
+    headers: {
+      'X-RapidAPI-Key': RAPID_API_KEY,
+      'X-RapidAPI-Host': 'nhl-api5.p.rapidapi.com',
+    },
+  };
+
+  try {
+    let players = await axios.request(options);
+    players = players?.data.team.athletes;
+    console.log(players);
+    return players;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

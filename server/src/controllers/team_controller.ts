@@ -1,6 +1,6 @@
 import Team from '#/models/team_model';
 import { getTeams } from '#/util/rapid_api_queries';
-import { RequestHandler, query } from 'express';
+import { RequestHandler } from 'express';
 
 export const saveAllTeams: RequestHandler = async (req, res) => {
   const count = await Team.countDocuments();
