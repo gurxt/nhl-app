@@ -57,6 +57,10 @@ export const PlayerSchema = new Schema<PlayerDocument>(
       type: Number,
       required: true,
     },
+    age: {
+      type: Number,
+      required: true,
+    },
     draft: {
       type: new Schema({
         round: {
